@@ -1,0 +1,55 @@
+spring:
+  kafka:
+    bootstrap-servers: https://kafka-dev.reliab.tech:9093
+    topic:
+      name: reliab.tech.ais.resume.dev
+    properties:
+      security.protocol: SASL_PLAINTEXT
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: |
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username="aisdev"
+        password="koh7Thoh";
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  application:
+    name: appstore-internship
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ais_google_drive
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    contexts: dev
+    change-log: /liquibase/master.xml
+
+jwt:
+  secret: YXNkZmYkIyNzZFNEU0RBQVNERksjQEBkc2ZqZGZrZHNqQEAjZHNmZ2ZnZmdeXiYmWipeJSQkI2RzZHMkIyVzZDQ1MDk5KUkjJCg5V0ZTSUo=
+  expiration: 600000
+google:
+  drive:
+   redirect:
+    url:   https://a4e2-185-215-54-147.ngrok-free.app/webhook
+   folder:
+    id: 1Q8uAhHFO63ZvzC0tWc5TU9nlg5uF_wQO
+  cloud:
+    credentials:
+      path: C:\\credentials\\credentials.json
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    module:
+      param-name: jackson-datatype-jsr310
+minio:
+  bucketName: ais
+  endpoint: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+schedule:
+  cron: "0 0 0 * * ?"  # cron для выполнения в полночь
+
